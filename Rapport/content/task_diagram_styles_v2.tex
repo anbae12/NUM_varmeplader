@@ -1,0 +1,103 @@
+%Should be used in every task diagram.
+%usage is eg. 
+% \node[task_description] (id)  at (0,0) {content};
+% \node[task_title] at (id.north) {title};
+
+
+\tikzset{buffer/.style={ %add lines
+    fill=blue!10, text=black, text width = 4.5em, minimum height =3em, text centered,
+    append after command={
+      [shorten >=0.2bp, shorten <=0.2bp]
+      (\tikzlastnode.north west)edge[very thick](\tikzlastnode.north east)
+    },
+    append after command={
+      [shorten >=0.2bp, shorten <=0.2bp]
+      (\tikzlastnode.south west)edge[very thick](\tikzlastnode.south east)
+    }
+  }
+}
+\tikzset{buffer_sem/.style={
+    fill=blue!10, text=black, text width = 4.5em, minimum height =3em, text centered,
+    append after command={
+      [shorten >=0.2bp, shorten <=0.2bp]
+      (\tikzlastnode.north west)edge[very thick](\tikzlastnode.north east)
+    },
+    append after command={
+      [shorten >=0.2bp, shorten <=0.2bp]
+      (\tikzlastnode.south west)edge[very thick](\tikzlastnode.south east)
+    },
+    append after command={
+      
+      (\tikzlastnode.20)edge[color=black!50](\tikzlastnode.340)
+    },
+    append after command={
+      (\tikzlastnode.30)edge[color=black!50](\tikzlastnode.330)
+    },
+    append after command={
+      (\tikzlastnode.40)edge[color=black!50](\tikzlastnode.320)
+    },
+    append after command={
+      (\tikzlastnode.50)edge[color=black!50](\tikzlastnode.310)
+    },
+    append after command={
+      (\tikzlastnode.65)edge[color=black!50](\tikzlastnode.295)
+    },
+    append after command={
+      (\tikzlastnode.80)edge[color=black!50](\tikzlastnode.280)
+    },
+    append after command={
+      (\tikzlastnode.100)edge[color=black!50](\tikzlastnode.260)
+    },
+    append after command={
+      (\tikzlastnode.115)edge[color=black!50](\tikzlastnode.245)
+    },
+    append after command={
+      (\tikzlastnode.130)edge[color=black!50](\tikzlastnode.230)
+    },
+    append after command={
+      (\tikzlastnode.140)edge[color=black!50](\tikzlastnode.220)
+    },
+    append after command={
+      node[semaphore] at (\tikzlastnode.north east) {}
+    }
+  }
+}
+
+\tikzset{memory_sem/.style= {
+    rectangle, draw, very thick, fill=blue!10, text width = 4.5em, minimum height =3em, text centered,
+    append after command={
+      node[semaphore] at (\tikzlastnode.north east) {}
+    }
+  }
+}
+\tikzstyle{memory} = [rectangle, draw, very thick, fill=blue!10, text width = 4.5em, minimum height =3em, text centered] 
+\tikzstyle{interrupt} = [diamond, draw, fill=red!10, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{task} = [circle, draw, color=black!50, text = black, fill=green!20, very thick, text width = 4.5em, minimum height = 4.5em, text centered]
+\tikzstyle{task_description} = [draw, color=black!50, text=black, fill=green!10, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=15pt, text width = 8em, align=left]
+\tikzstyle{task_title} =[fill=blue!20, text=black, ellipse]
+
+\tikzset{semaphore/.style={
+   circle, draw, minimum height = 0.7cm, fill=white,
+    append after command={
+      (\tikzlastnode.260) --
+      ++(0,0.1) edge[very thick]
+      ++(0,0.5)
+    },
+    append after command={
+      (\tikzlastnode.260) -- 
+      ++(0,0.3) edge[very thick]
+      ++(0.157,0.157) 
+    },
+    append after command={
+      (\tikzlastnode.260) -- 
+      ++(0,0.583) edge[very thick]
+      ++(0.15,-0.15) 
+    }
+  }
+} 
+
+
+\tikzstyle{fpga_component} = [draw, color=black!50, text=black, fill=green!10, very thick,
+    rectangle, rounded corners, inner sep=10pt,text centered, inner ysep=8pt, text width = 7em, align=left]

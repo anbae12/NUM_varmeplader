@@ -1,0 +1,42 @@
+\input{./content/preamble}
+\include{./content/templates} % Kan bruges til copy paste ind i rapport for forskellige outputs.....
+
+% PDF METADATA
+\usepackage[pdftex,
+            pdfauthor={A. L. Baek},
+            pdftitle={MISSING},
+            pdfsubject={MISSING},
+            pdfkeywords={MISSING},
+            pdfcreator={MISSING}]{hyperref}
+
+%lstlistings distance to text
+\lstset{aboveskip=0pt,belowskip=-10pt} %is this too agressive?
+\begin{document}
+
+% Disable indentation
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.7\baselineskip}%
+
+%\pagenumbering{gobble}
+%\thispagestyle{empty}
+%\include{./content/forside}
+%\clearpage
+\fancyfoot[RO,RE]{\thepage}
+\fancyfoot[LO,LE]{anbae12 & mijae12}
+\pagenumbering{Roman}
+%%%%%%%%%%%% Rapport intro %%%%%%%%%%%%
+%%%%%%%%%%%% Header and Footer %%%%%%%%%%%%
+\pagestyle{fancy}
+\fancyfoot{}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\fancyfoot[RO,RE]{-\space\thepage\space-}
+\fancyfoot[LO,LE]{anbae12 \& mijae12}
+
+%%%%%%%%%%%% Rapport begynder %%%%%%%%%%%%
+\input{./content/answer1}
+
+
+
+\end{document} 
+
