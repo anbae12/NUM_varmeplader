@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		9A0767B41AC1CCC40033CD9E /* Varmeplader */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Varmeplader; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A0767B71AC1CCC40033CD9E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9AA726781AC29B8600D9C9FE /* nr3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nr3.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				9A0767B71AC1CCC40033CD9E /* main.cpp */,
+				9AA726781AC29B8600D9C9FE /* nr3.h */,
 			);
 			path = Varmeplader;
 			sourceTree = "<group>";
@@ -232,6 +234,7 @@
 				9A0767BD1AC1CCC40033CD9E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
