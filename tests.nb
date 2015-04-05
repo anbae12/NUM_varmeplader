@@ -1,0 +1,271 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      8260,        262]
+NotebookOptionsPosition[      7497,        233]
+NotebookOutlinePosition[      7852,        249]
+CellTagsIndexPosition[      7809,        246]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"T1", "=", "1000"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"T2", "=", "500"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"epsilon1", "=", "0.80"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"epsilon2", "=", "0.60"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sigma", "=", 
+   RowBox[{"1.712", "*", 
+    RowBox[{"10", "^", 
+     RowBox[{"-", "9"}]}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"d", "=", "1.00"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"w", "=", "1.00"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.637220838678904*^9, 3.6372208640346203`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"F", "[", 
+   RowBox[{"x_", ",", "y_", ",", "d_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"1", "/", "2"}], ")"}], "*", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"d", "^", "2"}], ")"}], "/", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"d", "^", "2"}], "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"x", "-", "y"}], ")"}], "^", "2"}]}], ")"}], "^", 
+     RowBox[{"(", 
+      RowBox[{"3", "/", "2"}], ")"}]}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"u", "[", "x_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"epsilon1", "*", "sigma", "*", 
+    RowBox[{"T1", "^", "4"}]}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "-", "epsilon1"}], ")"}], "*", 
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"F", "[", 
+        RowBox[{"x", ",", "y", ",", "d"}], "]"}], "*", 
+       RowBox[{"v", "[", "y", "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"y", ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], "w"}], ",", 
+        RowBox[{"0.5", "w"}]}], "}"}]}], "]"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"v", "[", "y_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"epsilon2", "*", "sigma", "*", 
+    RowBox[{"T2", "^", "4"}]}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "-", "epsilon2"}], ")"}], "*", 
+    RowBox[{"Integrate", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"F", "[", 
+        RowBox[{"x", ",", "y", ",", "d"}], "]"}], "*", 
+       RowBox[{"u", "[", "x", "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"-", "0.5"}], "w"}], ",", 
+        RowBox[{"0.5", "w"}]}], "}"}]}], "]"}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.637224870928432*^9, 3.637224971602908*^9}, {
+  3.6372250337356443`*^9, 3.6372250482370853`*^9}, {3.6372255363101377`*^9, 
+  3.637225577177144*^9}, {3.637225962537281*^9, 3.6372259847182302`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"I1", "[", "x_", "]"}], ":=", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"F", "[", 
+      RowBox[{"x", ",", "y", ",", "d"}], "]"}], "*", 
+     RowBox[{"v", "[", "y", "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"y", ",", 
+      RowBox[{
+       RowBox[{"-", "0.5"}], "w"}], ",", 
+      RowBox[{"0.5", "w"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"I2", "[", "y_", "]"}], ":=", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"F", "[", 
+      RowBox[{"x", ",", "y", ",", "d"}], "]"}], "*", 
+     RowBox[{"u", "[", "x", "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", 
+      RowBox[{
+       RowBox[{"-", "0.5"}], "w"}], ",", 
+      RowBox[{"0.5", "w"}]}], "}"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.6372209885184803`*^9, 3.637221094964293*^9}, {
+  3.6372213045847197`*^9, 3.637221321806419*^9}, {3.6372250836644*^9, 
+  3.63722509860287*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Q1", ":=", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"u", "[", "x", "]"}], "-", 
+     RowBox[{"I1", "[", "x", "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", 
+      RowBox[{
+       RowBox[{"-", "0.5"}], "w"}], ",", 
+      RowBox[{"0.5", "w"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Q2", ":=", 
+  RowBox[{"Integrate", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"v", "[", "y", "]"}], "-", 
+     RowBox[{"I2", "[", "y", "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"y", ",", 
+      RowBox[{
+       RowBox[{"-", "0.5"}], "w"}], ",", 
+      RowBox[{"0.5", "w"}]}], "}"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.637225141542603*^9, 3.6372252099864817`*^9}}],
+
+Cell["", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell["3)", "Subsection",
+ CellChangeTimes->{{3.637226000061879*^9, 3.637226003682982*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"u", "[", "0", "]"}]], "Input",
+ CellChangeTimes->{{3.637226012424472*^9, 3.6372260189721003`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(1024\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.637226020092701*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(1024\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.637226020126144*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$RecursionLimit", "::", "reclim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Recursion depth of \[NoBreak]\\!\\(1024\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$RecursionLimit/reclim\\\", ButtonNote -> \
+\\\"$RecursionLimit::reclim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6372260201270027`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"General", "::", "stop"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Further output of \
+\[NoBreak]\\!\\(\\*StyleBox[\\($RecursionLimit :: reclim\\), \
+\\\"MessageName\\\"]\\)\[NoBreak] will be suppressed during this calculation. \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/stop\\\", \
+ButtonNote -> \\\"General::stop\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.637226020161202*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"$IterationLimit", "::", "itlim"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Iteration limit of \[NoBreak]\\!\\(4096\\)\[NoBreak] \
+exceeded. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/$IterationLimit/itlim\\\", ButtonNote -> \
+\\\"$IterationLimit::itlim\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6372260297099447`*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{740, 637},
+WindowMargins->{{4, Automatic}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 20, \
+2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 555, 18, 131, "Input"],
+Cell[1115, 40, 1916, 59, 97, "Input"],
+Cell[3034, 101, 960, 29, 46, "Input"],
+Cell[3997, 132, 733, 23, 46, "Input"],
+Cell[4733, 157, 22, 0, 44, "Subsection"],
+Cell[CellGroupData[{
+Cell[4780, 161, 90, 1, 36, "Subsection"],
+Cell[CellGroupData[{
+Cell[4895, 166, 122, 2, 28, "Input"],
+Cell[5020, 170, 474, 10, 24, "Message"],
+Cell[5497, 182, 474, 10, 24, "Message"],
+Cell[5974, 194, 476, 10, 24, "Message"],
+Cell[6453, 206, 540, 11, 24, "Message"],
+Cell[6996, 219, 473, 10, 24, "Message"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
