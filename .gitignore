@@ -1,3 +1,6 @@
 Varmeplader/Varmeplader.xcodeproj/project.pbxproj
 Varmeplader/Varmeplader.xcodeproj/project.xcworkspace/xcuserdata/Anders.xcuserdatad/UserInterfaceState.xcuserstate
 Varmeplader/Varmeplader.xcodeproj/project.xcworkspace/xcshareddata/Varmeplader.xccheckout
+Varmeplader/Varmeplader/deployment.pri
+Varmeplader/Varmeplader/varmeplader.pro
+Varmeplader/Varmeplader/varmeplader.pro.user
