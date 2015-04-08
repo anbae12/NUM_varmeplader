@@ -149,28 +149,11 @@ int main() {
     std::cout<<bb<<std::endl;
     
     //
+       SVD obj(AA);
+        VecDoub z(N);
+       obj.solve(z, bb);
     //
-    //
-    //
-    //
-    //    SVD obj(AA);
-    //    VecDoub W=obj.w;
-    //    MatDoub V=obj.v;
-    //    MatDoub U=obj.u;
-    //
-    //    std::cout<<"W\n"<<W<<std::endl;
-    //    std::cout<<"V\n"<<V<<std::endl;
-    //    std::cout<<"U\n"<<U<<std::endl;
-    //
-    
-    //    /* Estimate the parameters q = (x0, y0, a, b) and state your results.
-    //     State also the residual error ∥Aq − z∥.
-    //     */
-    //    //    VecDoub q(dataColumn);
-    //    VecDoub z(10);
-    //    obj.solve(z, b);
-    //
-    //    std::cout<<"\n"<<z<<std::endl;
+        std::cout<<"\n"<<z<<std::endl;
     //
     //
     //    // MIKKEL
@@ -197,19 +180,7 @@ int main() {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //
-    //
+
     //    // a)
     //
     //
