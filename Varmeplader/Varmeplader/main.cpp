@@ -23,7 +23,6 @@ Doub w = 1.00;
 VecDoub x(5);
 VecDoub y(5);
 VecDoub interval(2);
-VecDoub b(2);
 
 Doub Func(Doub xxx,Doub yyy){
     return 0.5*(pow(d, 2)/(2*pow(pow(d, 2)+pow(xxx-yyy,2),(3/2))));
@@ -39,8 +38,6 @@ struct Funcd {
     }
 };
 
-
-// Anders
 Doub make_h(int iteratations, Doub llim, Doub ulim){
     return (ulim-llim)/iteratations;
 }
@@ -144,13 +141,11 @@ int main() {
     Doub h = make_h(N, interval[0], interval[1]);
     MatDoub AA;
     VecDoub bb;
-    int NN  = 12 ;
-//    AA = make_A(NN,NN, interval[0], interval[1], h);
-    
-    bb = make_b(NN,h);
+    AA = make_A(N,N, interval[0], interval[1], h);
+    bb = make_b(N,h);
 
-    
-//    std::cout<<AA<<std::endl;
+
+    std::cout<<AA<<std::endl;
     std::cout<<bb<<std::endl;
     
     //
