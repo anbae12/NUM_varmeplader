@@ -2,11 +2,61 @@
 Assignment is completed by Mikkel Jaedicke (mijae12) \& Anders Bæk (anbae12)
 \section*{Question 1}
 
+$\beta_1 = (1-\varepsilon_1) \cdot h$
+
+$\beta_2 = (1-\varepsilon_2) \cdot h$
 
 \begin{equation}
-\begin{pmatrix}  1&  1\\  1&  1\\  1&1  \\\end{pmatrix}
-\label{eq:} 
+ \begin{pmatrix}
+   1  &   0  &  0  &  0  &  0  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_0,y_0, d)  &   - \beta_1 \cdot f(x_0,y_1, d)  &   - \beta_1 \cdot f(x_0,y_2, d)  &   - \beta_1 \cdot f(x_0,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_0,y_4, d)\\
+   0  &   1  &  0  &  0  &  0  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_1,y_0, d)  &   - \beta_1 \cdot f(x_1,y_1, d)  &   - \beta_1 \cdot f(x_1,y_2, d)  &   - \beta_1 \cdot f(x_1,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_1,y_4, d)\\
+   0  &   0  &  1  &  0  &  0  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_2,y_0, d)  &   - \beta_1 \cdot f(x_2,y_1, d)  &   - \beta_1 \cdot f(x_2,y_2, d)  &   - \beta_1 \cdot f(x_2,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_2,y_4, d)\\
+   0  &   0  &  0  &  1  &  0  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_3,y_0, d)  &   - \beta_1 \cdot f(x_3,y_1, d)  &   - \beta_1 \cdot f(x_3,y_2, d)  &   - \beta_1 \cdot f(x_3,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_3,y_4, d)\\
+   0  &   0  &  0  &  0  &  1  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_4,y_0, d)  &   - \beta_1 \cdot f(x_4,y_1, d)  &   - \beta_1 \cdot f(x_4,y_2, d)  &   - \beta_1 \cdot f(x_4,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_4,y_4, d)\\
+\end{pmatrix}
 \end{equation}
+
+\begin{equation}
+ \begin{pmatrix}
+   - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y0, d)      &   - \beta_2 \cdot f(x_1,y_0, d)  &   - \beta_2 \cdot f(x_2,y_0, d)  &   - \beta_2 \cdot f(x_4,y_0, d)  &  - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_0, d) &  1  &   0  &  0  &  0  &  0\\
+   - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y_1, d)    &   - \beta_2 \cdot f(x_1,y_1, d)  &   - \beta_2 \cdot f(x_2,y_1, d)  &   - \beta_2 \cdot f(x_4,y_1, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_1, d) &  0  &   1  &  0  &  0  &  0\\
+   - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y_2, d)    &   - \beta_2 \cdot f(x_1,y_2, d)  &   - \beta_2 \cdot f(x_2,y_2, d)  &   - \beta_2 \cdot f(x_4,y_2, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_2, d) &  0  &   0  &  1  &  0  &  0\\
+   - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y_3, d)    &   - \beta_2 \cdot f(x_1,y_3, d)  &   - \beta_2 \cdot f(x_2,y_3, d)  &   - \beta_2 \cdot f(x_4,y_3, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_3, d) &  0  &   0  &  0  &  1  &  0\\
+   - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y0_4, d)  &   - \beta_2 \cdot f(x_1,y_4, d)  &   - \beta_2 \cdot f(x_2,y_4, d)  &   - \beta_2 \cdot f(x_4,y_4, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_4, d) &  0  &   0  &  0  &  0  &  1 \\
+\end{pmatrix}
+\end{equation}
+
+\begin{equation}
+ \begin{pmatrix}
+ u_0\\
+ u_1\\
+ u_2\\
+ u_3\\
+ u_4\\
+ v_0\\
+ v_1\\
+ v_2\\
+ v_3\\
+ v_4\\
+ 
+ \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+ \begin{pmatrix}
+ \varepsilon_1 \sigma T_1^4\\
+ \varepsilon_1 \sigma T_1^4\\
+ \varepsilon_1 \sigma T_1^4\\
+ \varepsilon_1 \sigma T_1^4\\
+ \varepsilon_1 \sigma T_1^4\\
+ \varepsilon_2 \sigma T_2^4\\
+ \varepsilon_2 \sigma T_2^4\\
+ \varepsilon_2 \sigma T_2^4\\
+ \varepsilon_2 \sigma T_2^4\\
+ \varepsilon_2 \sigma T_2^4
+ \end{pmatrix}
+\end{equation}
+
 
 
 \section*{Question 2}
