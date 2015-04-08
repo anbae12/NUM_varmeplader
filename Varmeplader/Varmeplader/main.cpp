@@ -44,69 +44,18 @@ struct Funcd {
 Doub make_h(int iteratations, Doub llim, Doub ulim){
     return (ulim-llim)/iteratations;
 }
-MatDoub make_A(int x, Doub XXX, Doub YYY, Doub h){
-      int rows = (iteratations+1)*2;
-        int cols = 2;
-        int tempH1 = 0;
-        int tempH2 = 0;
-    //
-    //
-    //    MatDoub A(rows,cols);
-    //    for (int i=0; i<cols; i++) {
-    //        for (int j=0; j<rows; j++) {
-    //            if (i==0) {
-    //                if (j<iteratations+1) {
-    //                    A[j][i] = 0;
-    //                }
-    //                if (j==iteratations+1) {
-    //
-    //                    A[j][i] = 0.5*Func(XXX,YYY);
-    //                }
-    //                if (j>iteratations+1 && j<rows-1) {
-    //                    ++tempH1;
-    //                    A[j][i] = Func(XXX,YYY+(h*tempH1));
-    //                }
-    //                if (j==rows-1) {
-    //                    ++tempH1;
-    //                    A[j][i] = 0.5*Func(XXX,YYY+(h*tempH1));
-    //                }
-    //            }
-    //            if (i==1) {
-    //                if (j>iteratations) {
-    //                    A[j][i] = 0;
-    //                }
-    //                if (j==0) {
-    //                    A[j][i] = 0.5*Func(XXX, YYY);
-    //                }
-    //                if (j>0 && j<iteratations) {
-    //                    ++tempH2;
-    //                    A[j][i] = Func(XXX,YYY+(h*tempH2));
-    //                }
-    //                if (j==iteratations) {
-    //                    ++tempH2;
-    //                    A[j][i] = 0.5*Func(XXX,YYY+(h*tempH2));
-    //                }
-    //            }
-    //        }
-    //    }
-    //    return A;
-    int cols = 12;
-    int rows = 12;
-    
-    
+MatDoub make_A(int xD,int yD, Doub XXX, Doub YYY, Doub h){
+    int rows = xD;
+    int cols = yD;
+    int tempH1 = 0;
+    int tempH2 = 0;
+
     MatDoub A(cols,rows);
-    //    A[0][0] = 0; A[0][1] = 0; A[0][2] = 0; A[0][3] = 0; A[0][4] = 0; A[0][5] = 0; A[0][6] = 0; A[0][7] = 0; A[0][8] = 0; A[0][9] = 0;
-    //    A[1][0] = 0; A[1][1] = 0; A[1][2] = 0; A[1][3] = 0; A[1][4] = 0; A[1][5] = 0; A[1][6] = 0; A[1][7] = 0; A[1][8] = 0; A[1][9] = 0;
-    //    A[2][0] = 0; A[2][1] = 0; A[2][2] = 0; A[2][3] = 0; A[2][4] = 0; A[2][5] = 0; A[2][6] = 0; A[2][7] = 0; A[2][8] = 0; A[2][9] = 0;
-    //    A[3][0] = 0; A[3][1] = 0; A[3][2] = 0; A[3][3] = 0; A[3][4] = 0; A[3][5] = 0; A[3][6] = 0; A[3][7] = 0; A[3][8] = 0; A[3][9] = 0;
-    //    A[4][0] = 0; A[4][1] = 0; A[4][2] = 0; A[4][3] = 0; A[4][4] = 0; A[4][5] = 0; A[4][6] = 0; A[4][7] = 0; A[4][8] = 0; A[4][9] = 0;
-    //    A[5][0] = 0; A[5][1] = 0; A[5][2] = 0; A[5][3] = 0; A[5][4] = 0; A[5][5] = 0; A[5][6] = 0; A[5][7] = 0; A[5][8] = 0; A[5][9] = 0;
-    //    A[6][0] = 0; A[6][1] = 0; A[6][2] = 0; A[6][3] = 0; A[6][4] = 0; A[6][5] = 0; A[6][6] = 0; A[6][7] = 0; A[6][8] = 0; A[6][9] = 0;
-    //    A[7][0] = 0; A[7][1] = 0; A[7][2] = 0; A[7][3] = 0; A[7][4] = 0; A[7][5] = 0; A[7][6] = 0; A[7][7] = 0; A[7][8] = 0; A[7][9] = 0;
-    //    A[8][0] = 0; A[8][1] = 0; A[8][2] = 0; A[8][3] = 0; A[8][4] = 0; A[8][5] = 0; A[8][6] = 0; A[8][7] = 0; A[8][8] = 0; A[8][9] = 0;
-    //    A[9][0] = 0; A[9][1] = 0; A[9][2] = 0; A[9][3] = 0; A[9][4] = 0; A[9][5] = 0; A[9][6] = 0; A[9][7] = 0; A[9][8] = 0; A[9][9] = 0;
-    //
-    
+    for (int i = 0; i<cols; i++) {
+        for (int j = 0; j<rows; j++) {
+            A[j][i]=0;
+        }
+    }
     
     int i = 0;
     for (int j = 0; j<rows; j++) {
@@ -114,23 +63,54 @@ MatDoub make_A(int x, Doub XXX, Doub YYY, Doub h){
         i++;
     }
     
-    
     for (int i = cols/2; i<cols; i++) {
         for (int j = 0; j<rows/2; j++) {
-            A[j][i]=9;
-            
+            if (j <= rows/2 && i == cols/2) {
+                A[j][i] = 0.5*Func(XXX,YYY);
+            }
+            if (j <= rows/2 && i < cols-1 && i > cols/2) {
+                ++tempH1;
+                A[j][i] = Func(XXX,YYY+(h*tempH1));
+            }
+            if (j <= rows/2 && i == cols-1) {
+                ++tempH1;
+                A[j][i] = 0.5*Func(XXX,YYY+(h*tempH1));
+            }
         }
     }
+    
     for (int i = 0; i<cols/2; i++) {
         for (int j = rows/2; j<rows; j++) {
-            A[j][i]=8;
-            
+            if (j >= rows/2 && i == 0) {
+                A[j][i] = 0.5*Func(XXX,YYY);
+            }
+            if (j >= rows/2 && i < cols/2 && i > 0) {
+                ++tempH2;
+                A[j][i] = Func(XXX,YYY+(h*tempH2));
+            }
+            if (j >= rows/2 && i == cols/2-1) {
+                ++tempH2;
+                A[j][i] = 0.5*Func(XXX,YYY+(h*tempH2));
+            }
         }
     }
-    
-    
     return A;
 }
+
+VecDoub make_b(int N, Doub h){
+
+    std::cout<<N/2<<std::endl;
+    int half = N/2;
+    for (int i = 0; i<N; i++) {
+        if (i<half) {
+            b[i] = (-epsilon1*sigma*pow(T1,4))/((1-epsilon1)*h);
+        }else{
+            b[i] = (-epsilon2*sigma*pow(T2,4))/((1-epsilon2)*h);
+        }
+    }
+   return b;
+}
+
 
 // MIKKEL Trapetz
 template<class T>
@@ -144,7 +124,7 @@ Doub trapez_integral(T &func, Doub a, Doub b,int N){
     }
     return h*(0.5*func(a)+0.5*func(b)+sum);
 }
->>>>>>> 5f3e21247e31a70bb306552678d0e429d0e7bf80
+
 
 Doub f(Doub c){
     return c*c;
@@ -153,7 +133,7 @@ Doub f(Doub c){
 int main() {
     // TEST!!!
     std::cout<<"Result: "<<trapez_integral(f,0,10,10000)<<std::endl;
-
+    
     // DATA POINTS
     x[2]=0; x[3]=0.25; x[1]=-0.25; x[4]=0.5; x[0]=-0.5;
     y[2]=0; y[3]=0.25; y[1]=-0.25; y[4]=0.5; y[0]=-0.5;
@@ -165,14 +145,16 @@ int main() {
     // CREATE A and B
     Doub h = make_h(N, interval[0], interval[1]);
     MatDoub AA;
-    AA = make_A(N, interval[0], interval[1], h);
+    VecDoub bb;
+    int NN  = 12 ;
+    AA = make_A(NN,NN, interval[0], interval[1], h);
+    
+//    bb = make_b(NN,h);
+
     
     std::cout<<AA<<std::endl;
+//    std::cout<<bb<<std::endl;
     
-    //    b[0] = (-epsilon1*sigma*pow(T1,4))/((1-epsilon1)*h);
-    //    b[1] = (-epsilon2*sigma*pow(T2,4))/((1-epsilon2)*h);
-    //
-    //    std::cout<<b<<std::endl;
     //
     //
     //
