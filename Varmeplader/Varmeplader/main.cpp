@@ -17,7 +17,7 @@ Doub T1 = 1000;
 Doub T2 = 500;
 Doub epsilon1 = 0.80;
 Doub epsilon2 = 0.60;
-Doub sigma = 1.712*10e-09;
+Doub sigma = 1.712e-09;
 Doub d = 1.00;
 Doub w = 1.00;
 VecDoub x(5);
@@ -25,22 +25,16 @@ VecDoub y(5);
 VecDoub interval(2);
 
 Doub Func(Doub xxx,Doub yyy){
-    return 0.5*((pow(d, 2)/(pow(pow(d, 2)+pow(xxx-yyy,2),(3/2)))));
+    return 0.5*pow(d, 2)/(pow(pow(d,2)+pow(xxx-yyy,2),1.5));
 }
 
 Doub make_h(int iteratations, Doub llim, Doub ulim){
     return (ulim-llim)/iteratations;
 }
 
-MatDoub make_A(VecDoub beta, int xD,int yD, Doub XXX, Doub YYY, Doub h){
-    int rows = xD;
-    int cols = yD;
-    int tempH1x = 0;
-    int tempH2x = 0;
-    int tempH1y = 0;
-    int tempH2y = 0;
-
-    
+MatDoub make_A(VecDoub beta, int N, Doub l_bound, Doub h_bound, Doub h){
+    int rows = 2*(N+1);
+    int cols = 2*(N+1);
     
     
     MatDoub A(cols,rows);
@@ -59,16 +53,13 @@ MatDoub make_A(VecDoub beta, int xD,int yD, Doub XXX, Doub YYY, Doub h){
     for (int i = cols/2; i<cols; i++) {
         for (int j = 0; j<rows/2; j++) {
             if (j <= rows/2 && i == cols/2) {
-                A[j][i] = -beta[0]*0.5*Func(XXX+(h*tempH1x),YYY);
-                tempH1x++;
+                A[j][i] = -beta[0]*0.5*Func(l_bound+(h*j),l_bound);
             }
             if (j <= rows/2 && i < cols-1 && i > cols/2) {
-                ++tempH1;
-                A[j][i] = -beta[0]*Func(XXX,YYY+(h*tempH1));
+                A[j][i] = -beta[0]*Func(l_bound+(h*j),l_bound+(h*(i-(cols/2))));
             }
             if (j <= rows/2 && i == cols-1) {
-                ++tempH1;
-                A[j][i] = -beta[0]*0.5*Func(XXX,YYY+(h*tempH1));
+                A[j][i] = -beta[0]*0.5*Func(l_bound+(h*j),h_bound);
             }
         }
     }
@@ -76,15 +67,13 @@ MatDoub make_A(VecDoub beta, int xD,int yD, Doub XXX, Doub YYY, Doub h){
     for (int i = 0; i<cols/2; i++) {
         for (int j = rows/2; j<rows; j++) {
             if (j >= rows/2 && i == 0) {
-                A[j][i] = -beta[1]*0.5*Func(XXX,YYY);
+                A[j][i] = -beta[1]*0.5*Func(l_bound,l_bound+(h*(j-(rows/2))));
             }
             if (j >= rows/2 && i < cols/2 && i > 0) {
-                ++tempH2;
-                A[j][i] = -beta[1]*Func(XXX,YYY+(h*tempH2));
+                A[j][i] = -beta[1]*Func(l_bound+(h*i),l_bound+(h*(j-(rows/2))));
             }
             if (j >= rows/2 && i == cols/2-1) {
-                ++tempH2;
-                A[j][i] = -beta[1]*0.5*Func(XXX,YYY+(h*tempH2));
+                A[j][i] = -beta[1]*0.5*Func(h_bound,l_bound+(h*(j-(rows/2))));
             }
         }
     }
@@ -98,7 +87,8 @@ VecDoub make_beta( Doub h){
    return beta;
 }
 
-VecDoub make_b(int N, Doub h){
+VecDoub make_b(int N_1, Doub h){
+    int N = 2*(N_1+1);
     VecDoub b(N);
     for (int i = 0; i<N; i++) {
         if (i<N/2) {
@@ -138,15 +128,16 @@ int main() {
     interval[0] = -0.5*w;
     interval[1] = 0.5*w;
     int N = 4;
-        int NN = N*2+2;
+    int NN = N*2+2;
     
     
     // CREATE A and b
-    Doub h = make_h(NN, interval[0], interval[1]);
+    Doub h = make_h(N, interval[0], interval[1]);
+    std:cout<<"h: "<<h<<std::endl;
     MatDoub AA;
     VecDoub bb;
-    AA = make_A(make_beta(h),NN,NN, interval[0], interval[1], h);
-    bb = make_b(NN,h);
+    AA = make_A(make_beta(h),N, interval[0], interval[1], h);
+    bb = make_b(N,h);
 
 
     std::cout<<AA<<std::endl;
@@ -154,61 +145,10 @@ int main() {
     
     //
        SVD obj(AA);
-        VecDoub z(NN);
-       obj.solve(z, bb);
+       VecDoub z(NN);
+       obj.solve(bb, z);
     //
         std::cout<<"\n"<<z<<std::endl;
-    //
-    //
-    //    // MIKKEL
-    //    VecDoub I(5);
-    //    I[0] = (h*(0.5*Func(interval[0], interval[0])*z[5])+0.5*Func(interval[0], interval[1])*z[9]+Func(interval[0], interval[0]+h)*z[6]+Func(interval[0], interval[0]+h+h)*z[7]+Func(interval[0], interval[0]+h+h+h))*z[8];
-    //    I[1] = (h*(0.5*Func(interval[0]+h, interval[0])*z[5])+0.5*Func(interval[0]+h, interval[1])*z[9]+Func(interval[0]+h, interval[0]+h)*z[6]+Func(interval[0]+h, interval[0]+h+h)*z[7]+Func(interval[0]+h, interval[0]+h+h+h))*z[8];
-    //    I[2] = (h*(0.5*Func(interval[0]+h+h, interval[0])*z[5])+0.5*Func(interval[0]+h+h, interval[1])*z[9]+Func(interval[0]+h+h, interval[0]+h)*z[6]+Func(interval[0]+h+h, interval[0]+h+h)*z[7]+Func(interval[0]+h+h, interval[0]+h+h+h))*z[8];
-    //    I[3] = (h*(0.5*Func(interval[0]+h+h+h, interval[0])*z[5])+0.5*Func(interval[0]+h+h+h, interval[1])*z[9]+Func(interval[0]+h+h+h, interval[0]+h)*z[6]+Func(interval[0]+h+h+h, interval[0]+h+h)*z[7]+Func(interval[0]+h+h+h, interval[0]+h+h+h))*z[8];
-    //    I[4] = (h*(0.5*Func(interval[0]+h+h+h+h, interval[0])*z[5])+0.5*Func(interval[0]+h+h+h+h, interval[1])*z[9]+Func(interval[0]+h+h+h+h, interval[0]+h)*z[6]+Func(interval[0]+h+h+h+h, interval[0]+h+h)*z[7]+Func(interval[0]+h+h+h+h, interval[0]+h+h+h))*z[8];
-    //
-    //
-    //    Doub Q1 = h*(0.5*(z[5]-I[0])+0.5*(z[9]-I[4])+(z[6]-I[1])+(z[7]-I[2])+(z[8]-I[3]));
-    //
-    //    std::cout<<Q1<<std::endl;
-    //
-    //
-    //
-    //
-    //
-    
-    
-    
-    
-    
-    
-    
 
-    //    // a)
-    //
-    //
-    //    //Doub precision = 1e-6 ; // Set precision
-    //    int maxiterations = 20;
-    //    Funcd fx;
-    //    //    Trapzd< Funcd > Tra(fx, interval[0], interval[1]);
-    //    Trapzd< Funcd > Tra(fx, 0, 1);
-    //    Tra.setww = 14;
-    //
-    //
-    //    std::cout<< std::setprecision(5)<<"k"<<std::setw(Tra.setww)<<"S(hk)"<<std::setw(Tra.setww)<<"ROE"<<std::setw(Tra.setww)<<"REE" <<std::endl;
-    //    for (int i=0; i<maxiterations; i++) {
-    //        Tra.next();
-    //    }
-    //
-    //
-    //
-    //
-    // b)
-    // c)
-    
-    
-    
-    
     return 0;
 }
