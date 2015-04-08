@@ -131,18 +131,31 @@ MatDoub make_A(int x, Doub XXX, Doub YYY, Doub h){
     
     return A;
 }
+<<<<<<< HEAD
 
+=======
+// MIKKEL Trapetz
+template<class T>
 
+Doub trapez_integral(T &func, Doub a, Doub b,int N){
+    Doub interval = b-a;
+    Doub h = interval /N;
+    Doub sum = 0;
+    for(int i = 1; i<N;i++){
+        sum+= func(a+i*h);
+    }
+    return h*(0.5*func(a)+0.5*func(b)+sum);
+}
+>>>>>>> 5f3e21247e31a70bb306552678d0e429d0e7bf80
 
-
-
-
-
-
-
-
+Doub f(Doub c){
+    return c*c;
+}
 
 int main() {
+    // TEST!!!
+    std::cout<<"Result: "<<trapez_integral(f,0,10,10000)<<std::endl;
+
     // DATA POINTS
     x[2]=0; x[3]=0.25; x[1]=-0.25; x[4]=0.5; x[0]=-0.5;
     y[2]=0; y[3]=0.25; y[1]=-0.25; y[4]=0.5; y[0]=-0.5;
@@ -239,10 +252,10 @@ int main() {
     //    for (int i=0; i<maxiterations; i++) {
     //        Tra.next();
     //    }
-    //    
     //
-    //    
-    //    
+    //
+    //
+    //
     // b)
     // c)
     
