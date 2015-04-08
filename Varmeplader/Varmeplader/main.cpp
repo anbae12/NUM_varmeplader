@@ -25,28 +25,24 @@ VecDoub y(5);
 VecDoub interval(2);
 
 Doub Func(Doub xxx,Doub yyy){
-    return 0.5*(pow(d, 2)/(2*pow(pow(d, 2)+pow(xxx-yyy,2),(3/2))));
+    return 0.5*((pow(d, 2)/(pow(pow(d, 2)+pow(xxx-yyy,2),(3/2)))));
 }
-
-Doub eksfunc(Doub x){
-    return sqrt(x)*cos(x*x)*exp(-x);
-}
-
-struct Funcd {
-    Doub operator() (const Doub x) {
-        return eksfunc(x);
-    }
-};
 
 Doub make_h(int iteratations, Doub llim, Doub ulim){
     return (ulim-llim)/iteratations;
 }
+
 MatDoub make_A(VecDoub beta, int xD,int yD, Doub XXX, Doub YYY, Doub h){
     int rows = xD;
     int cols = yD;
-    int tempH1 = 0;
-    int tempH2 = 0;
+    int tempH1x = 0;
+    int tempH2x = 0;
+    int tempH1y = 0;
+    int tempH2y = 0;
 
+    
+    
+    
     MatDoub A(cols,rows);
     for (int i = 0; i<cols; i++) {
         for (int j = 0; j<rows; j++) {
@@ -63,7 +59,8 @@ MatDoub make_A(VecDoub beta, int xD,int yD, Doub XXX, Doub YYY, Doub h){
     for (int i = cols/2; i<cols; i++) {
         for (int j = 0; j<rows/2; j++) {
             if (j <= rows/2 && i == cols/2) {
-                A[j][i] = -beta[0]*0.5*Func(XXX,YYY);
+                A[j][i] = -beta[0]*0.5*Func(XXX+(h*tempH1x),YYY);
+                tempH1x++;
             }
             if (j <= rows/2 && i < cols-1 && i > cols/2) {
                 ++tempH1;
@@ -105,9 +102,9 @@ VecDoub make_b(int N, Doub h){
     VecDoub b(N);
     for (int i = 0; i<N; i++) {
         if (i<N/2) {
-            b[i] = -epsilon1*sigma*pow(T1,4);
+            b[i] = epsilon1*sigma*pow(T1,4);
         }else{
-            b[i] = -epsilon2*sigma*pow(T2,4);
+            b[i] = epsilon2*sigma*pow(T2,4);
         }
     }
     return b;
