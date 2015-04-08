@@ -98,11 +98,9 @@ MatDoub make_A(int xD,int yD, Doub XXX, Doub YYY, Doub h){
 }
 
 VecDoub make_b(int N, Doub h){
-
-    std::cout<<N/2<<std::endl;
-    int half = N/2;
+    VecDoub b(N);
     for (int i = 0; i<N; i++) {
-        if (i<half) {
+        if (i<N/2) {
             b[i] = (-epsilon1*sigma*pow(T1,4))/((1-epsilon1)*h);
         }else{
             b[i] = (-epsilon2*sigma*pow(T2,4))/((1-epsilon2)*h);
@@ -142,18 +140,18 @@ int main() {
     int N = 4;
     
     
-    // CREATE A and B
+    // CREATE A and b
     Doub h = make_h(N, interval[0], interval[1]);
     MatDoub AA;
     VecDoub bb;
     int NN  = 12 ;
-    AA = make_A(NN,NN, interval[0], interval[1], h);
+//    AA = make_A(NN,NN, interval[0], interval[1], h);
     
-//    bb = make_b(NN,h);
+    bb = make_b(NN,h);
 
     
-    std::cout<<AA<<std::endl;
-//    std::cout<<bb<<std::endl;
+//    std::cout<<AA<<std::endl;
+    std::cout<<bb<<std::endl;
     
     //
     //
