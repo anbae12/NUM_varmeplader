@@ -41,7 +41,7 @@ struct Funcd {
 Doub make_h(int iteratations, Doub llim, Doub ulim){
     return (ulim-llim)/iteratations;
 }
-MatDoub make_A(int xD,int yD, Doub XXX, Doub YYY, Doub h){
+MatDoub make_A(VecDoub beta, int xD,int yD, Doub XXX, Doub YYY, Doub h){
     int rows = xD;
     int cols = yD;
     int tempH1 = 0;
@@ -63,15 +63,15 @@ MatDoub make_A(int xD,int yD, Doub XXX, Doub YYY, Doub h){
     for (int i = cols/2; i<cols; i++) {
         for (int j = 0; j<rows/2; j++) {
             if (j <= rows/2 && i == cols/2) {
-                A[j][i] = 0.5*Func(XXX,YYY);
+                A[j][i] = -beta[0]*0.5*Func(XXX,YYY);
             }
             if (j <= rows/2 && i < cols-1 && i > cols/2) {
                 ++tempH1;
-                A[j][i] = Func(XXX,YYY+(h*tempH1));
+                A[j][i] = -beta[0]*Func(XXX,YYY+(h*tempH1));
             }
             if (j <= rows/2 && i == cols-1) {
                 ++tempH1;
-                A[j][i] = 0.5*Func(XXX,YYY+(h*tempH1));
+                A[j][i] = -beta[0]*0.5*Func(XXX,YYY+(h*tempH1));
             }
         }
     }
@@ -79,35 +79,39 @@ MatDoub make_A(int xD,int yD, Doub XXX, Doub YYY, Doub h){
     for (int i = 0; i<cols/2; i++) {
         for (int j = rows/2; j<rows; j++) {
             if (j >= rows/2 && i == 0) {
-                A[j][i] = 0.5*Func(XXX,YYY);
+                A[j][i] = -beta[1]*0.5*Func(XXX,YYY);
             }
             if (j >= rows/2 && i < cols/2 && i > 0) {
                 ++tempH2;
-                A[j][i] = Func(XXX,YYY+(h*tempH2));
+                A[j][i] = -beta[1]*Func(XXX,YYY+(h*tempH2));
             }
             if (j >= rows/2 && i == cols/2-1) {
                 ++tempH2;
-                A[j][i] = 0.5*Func(XXX,YYY+(h*tempH2));
+                A[j][i] = -beta[1]*0.5*Func(XXX,YYY+(h*tempH2));
             }
         }
     }
     return A;
 }
 
+VecDoub make_beta( Doub h){
+    VecDoub beta(2);
+            beta[0] = (1-epsilon1)*h;
+            beta[1] = (1-epsilon2)*h;
+   return beta;
+}
+
 VecDoub make_b(int N, Doub h){
     VecDoub b(N);
     for (int i = 0; i<N; i++) {
         if (i<N/2) {
-            //b[i] = (-epsilon1*sigma*pow(T1,4))/((1-epsilon1)*h);
-            b[i] = (1-epsilon1)*h;
+            b[i] = -epsilon1*sigma*pow(T1,4);
         }else{
-            //b[i] = (-epsilon2*sigma*pow(T2,4))/((1-epsilon2)*h);
-            b[i] = (1-epsilon2)*h;
+            b[i] = -epsilon2*sigma*pow(T2,4);
         }
     }
-   return b;
+    return b;
 }
-
 
 // MIKKEL Trapetz
 template<class T>
@@ -144,7 +148,7 @@ int main() {
     Doub h = make_h(NN, interval[0], interval[1]);
     MatDoub AA;
     VecDoub bb;
-    AA = make_A(NN,NN, interval[0], interval[1], h);
+    AA = make_A(make_beta(h),NN,NN, interval[0], interval[1], h);
     bb = make_b(NN,h);
 
 
