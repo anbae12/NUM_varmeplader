@@ -2,9 +2,15 @@
 Assignment is completed by Mikkel Jaedicke (mijae12) \& Anders Bæk (anbae12)
 \section*{Question 1}
 
-$\beta_1 = (1-\varepsilon_1) \cdot h$
 
-$\beta_2 = (1-\varepsilon_2) \cdot h$
+
+
+
+\begin{align}
+\beta_1 &= (1-\varepsilon_1) \cdot h \\
+\beta_2 &= (1-\varepsilon_2) \cdot h
+\end{align}
+
 
 \begin{equation}
  \begin{pmatrix}
@@ -15,6 +21,15 @@ $\beta_2 = (1-\varepsilon_2) \cdot h$
    0  &   0  &  0  &  0  &  1  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_4,y_0, d)  &   - \beta_1 \cdot f(x_4,y_1, d)  &   - \beta_1 \cdot f(x_4,y_2, d)  &   - \beta_1 \cdot f(x_4,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_4,y_4, d)\\
 \end{pmatrix}
 \end{equation}
+
+
+\begin{equation}
+A=\begin{pmatrix}1 & 0 & 0 & 0 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 0 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 0 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 0 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 0 },y_{ N },d) \\ 0 & 1 & 0 & 0 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 1 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 1 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 1 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 1 },y_{ N },d) \\ 0 & 0 & 1 & 0 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 2 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 2 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 2 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 2 },y_{ N },d) \\ 0 & 0 & 0 & 1 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 3 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 3 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 3 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 3 },y_{ N },d) \\ 0 & 0 & 0 & 0 & 1 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 4 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 4 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 4 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 4 },y_{ N },d)\\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y0,d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 0 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 0 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 0 },d) & 1 & 0 & 0 & 0 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y_{ 1 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 1 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 1 },d) & 0 & 1 & 0 & 0 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y_{ 2 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 2 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 2 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 2 },d) & 0 & 0 & 1 & 0 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y_{ 3 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 3 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 3 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 3 },d) & 0 & 0 & 0 & 1 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y0_{ 4 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 4 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 4 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 4 },d) & 0 & 0 & 0 & 0 & 1 \end{pmatrix}
+ \end{equation}
+
+
+
+
 
 \begin{equation}
  \begin{pmatrix}

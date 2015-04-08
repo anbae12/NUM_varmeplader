@@ -98,9 +98,11 @@ VecDoub make_b(int N, Doub h){
     VecDoub b(N);
     for (int i = 0; i<N; i++) {
         if (i<N/2) {
-            b[i] = (-epsilon1*sigma*pow(T1,4))/((1-epsilon1)*h);
+            //b[i] = (-epsilon1*sigma*pow(T1,4))/((1-epsilon1)*h);
+            b[i] = (1-epsilon1)*h;
         }else{
-            b[i] = (-epsilon2*sigma*pow(T2,4))/((1-epsilon2)*h);
+            //b[i] = (-epsilon2*sigma*pow(T2,4))/((1-epsilon2)*h);
+            b[i] = (1-epsilon2)*h;
         }
     }
    return b;
@@ -135,14 +137,15 @@ int main() {
     interval[0] = -0.5*w;
     interval[1] = 0.5*w;
     int N = 4;
+        int NN = N*2+2;
     
     
     // CREATE A and b
-    Doub h = make_h(N, interval[0], interval[1]);
+    Doub h = make_h(NN, interval[0], interval[1]);
     MatDoub AA;
     VecDoub bb;
-    AA = make_A(N,N, interval[0], interval[1], h);
-    bb = make_b(N,h);
+    AA = make_A(NN,NN, interval[0], interval[1], h);
+    bb = make_b(NN,h);
 
 
     std::cout<<AA<<std::endl;
@@ -150,7 +153,7 @@ int main() {
     
     //
        SVD obj(AA);
-        VecDoub z(N);
+        VecDoub z(NN);
        obj.solve(z, bb);
     //
         std::cout<<"\n"<<z<<std::endl;
