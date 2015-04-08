@@ -40,7 +40,6 @@ MatDoub make_A(VecDoub beta, int N, Doub l_bound, Doub h_bound, Doub h){
     int rows = 2*(N+1);
     int cols = 2*(N+1);
     
-    
     MatDoub A(cols,rows);
     for (int i = 0; i<cols; i++) {
         for (int j = 0; j<rows; j++) {
@@ -121,67 +120,27 @@ Doub Q(VecDoub list, Doub const_1, Doub const_2, Doub h){
     return sum;
 }
 
-
 int main() {
-    
     // DATA POINTS
     interval[0] = -0.5*w;
     interval[1] = 0.5*w;
-    /*
-    int N = 4;
-    int NN = N*2+2;
-
-    // CREATE A and b
-    Doub h = make_h(N, interval[0], interval[1]);
-    MatDoub AA;
-    VecDoub bb;
-    AA = make_A(make_beta(h),N, interval[0], interval[1], h);
-    bb = make_b(N);
-
-
-    std::cout<<AA<<std::endl;
-    std::cout<<bb<<std::endl;
-    SVD obj(AA);
-    VecDoub z(NN);
-    obj.solve(bb, z);
-    std::cout<<"\n"<<z<<std::endl;
-
-    //Calculate Q1 and Q2
-    VecDoub z_u(NN/2),z_v(NN/2);
-    Doub Q1, Q2;
-    for(int i = 0; i<NN; i++){
-        if(i<NN/2){
-            z_u[i] = z[i];
-        }
-        else{
-            z_v[i-NN/2] = z[i];
-        }
-    }
-    z_v.print();
-
-    Q1 = Q(z_u,const1_1,const1_2,h);
-    Q2 = Q(z_v,const2_1,const2_2,h);
-    std::cout<<"Q1: "<<Q1<<endl;
-    std::cout<<"Q2:"<<Q2<<endl;
-    */
-
-
+    
     Doub Q1, Q2, Q1_last, Q2_last, Q1_lastlast, Q2_lastlast, alpha_k1, alpha_k2, alpha_k, error1, error2;
     for(int N = 4; N<1040; N = N*2){
         int NN = N*2+2;
-
+        
         // CREATE A and b
         Doub h = make_h(N, interval[0], interval[1]);
         MatDoub AA;
         VecDoub bb;
         AA = make_A(make_beta(h),N, interval[0], interval[1], h);
         bb = make_b(N);
-
+        
         //Solve with SVD
         SVD obj(AA);
         VecDoub z(NN);
         obj.solve(bb, z);
-
+        
         //Calculate Q1 and Q2
         VecDoub z_u(NN/2),z_v(NN/2);
         for(int i = 0; i<NN; i++){
@@ -196,55 +155,49 @@ int main() {
         Q2_lastlast = Q2_last;
         Q1_last = Q1;
         Q2_last = Q2;
-
+        
         //Calculate Q1 and Q2
         Q1 = Q(z_u,const1_1,const1_2,h);
         Q2 = Q(z_v,const2_1,const2_2,h);
-
+        
         //Richardson alpha_k estimate
         alpha_k1 = (Q1_lastlast - Q1_last)/(Q1_last-Q1);
         alpha_k2 = (Q2_lastlast - Q2_last)/(Q2_last-Q2);
-
-        //std::cout<<"Alpha_k1 = "<<alpha_k1<<std::endl;
-        //std::cout<<"Alpha_k2 = "<<alpha_k2<<std::endl;
-
+        
+        
         // It is seen that both alpha_k converges to 4!
         alpha_k = 4;
-
+        
         //Richardson error estimate
         error1 = (Q1 - Q1_last)/(alpha_k-1);
         error2 = (Q2 - Q2_last)/(alpha_k-1);
-
-        //OUTPUT
+        
+        int NNN=NN-1;
+        int NNNN=NNN/2;
+        
         std::cout<<scientific<<setprecision(16)
-                << "N = "       << N                << setw(15)
-                << "x(-1/4) = " << z[NN/8]          << setw(15)
-                << "x(0) = "    << z[NN/4]          << setw(15)
-                << "x(1/4) = "  << z[NN/4+NN/8]     << setw(15)
-                << "y(-1/4) ="  << z[NN/2+NN/8]     << setw(15)
-                << "y(0) = "    << z[NN/2+NN/4]     << setw(15)
-                << "y(1/4) ="   << z[NN/2+NN/4+NN/8]<< "\n"
-                << "Q1 = "      << Q1               << setw(15)
-                << "Q2 = "      << Q2               << setw(15)
-                << "Alp_k1 = "  << alpha_k1         << setw(15)
-                << "Alp_k2 = "  << alpha_k2         << setw(15)
-                << "Error1 = "  << error1           << setw(15)
-                << "Error2 = "  << error2
-                << std::endl<<std::endl<<std::endl;
-
-
-
-
-
-
+        << "N = "       << N                        << "\n"
+        << "u(-1/2) = " << z[0]                     << "\n"
+        << "u(-1/4) = " << z[NNNN-(((NNNN/2)-1))]   << "\n"
+        << "u(0) = "    << z[((NNNN/2)/2)]          << "\n"
+        << "u(1/4) = "  << z[NNNN-((NNNN/2)/2)]     << "\n"
+        << "u(1/2) = "  << z[NNNN]                  << "\n"
+        << "v(-1/2) ="  << z[NNNN+1]                << "\n"
+        << "v(-1/4) ="  << z[NNN-(((NNN/2)-1))]     << "\n"
+        << "v(0) = "    << z[NNN-((NNN/2)/2)]       << "\n"
+        << "v(1/4) ="   << z[((NNN/2)/2)+NNNN]      << "\n"
+        << "v(1/2) ="   << z[NNN]                   << "\n"
+        << "Q1 = "      << Q1                       << "\n"
+        << "Q2 = "      << Q2                       << "\n"
+        << "Alp_k1 = "  << alpha_k1                 << "\n"
+        << "Alp_k2 = "  << alpha_k2                 << "\n"
+        << "Error1 = "  << error1                   << "\n"
+        << "Error2 = "  << error2                   << "\n\n";
+//        // Print to table
+//        std::cout<<scientific<<setprecision(8)
+//        <<N<<"&"<<z[0]<<"&"<<z[NNNN-(((NNNN/2)-1))]<<"&"<<z[((NNNN/2)/2)]<< "&"<< z[NNNN-((NNNN/2)/2)]<<"&"<< z[NNNN] <<"&"<<z[NNNN+1]<<"&"<<z[NNN-(((NNN/2)-1))]<<"&"<<z[NNN-((NNN/2)/2)]<<"&"<<z[((NNN/2)/2)+NNNN]<<"&"<<z[NNN]<< "\n"
+//        << N<<"&"<<Q1<<"&"<<alpha_k1<<"&"<<error1<<"&"<<Q2<<"&"<<alpha_k2<<"&"<<error2<< "\n\n";
     }
-
-
-
-
-
-    //Part c
-
-
+    
     return 0;
 }
