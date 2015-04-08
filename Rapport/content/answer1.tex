@@ -1,78 +1,214 @@
 \section*{Radiation Balance between parallel plates}
 Assignment is completed by Mikkel Jaedicke (mijae12) \& Anders Bæk (anbae12)
+
+
+
+\begin{equation}
+\begin{align*}
+u\left( x \right) &=\varepsilon _{ 1 }\sigma { T }_{ 1 }^{ 4 }+\left( 1-\varepsilon _{ 1 } \right) \int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F\left( x,y,d \right) \cdot v\left( y \right) { dy }\\ 
+v\left( y \right) &=\varepsilon _{ 2 }\sigma { T }_{ 2 }^{ 4 }+\left( 1-\varepsilon _{ 2 } \right) \int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F\left( x,y,d \right) \cdot u\left( x \right) { dx }
+\end{align*}
+\label{eq:ss}
+\end{equation}
+
+
+
+
+\begin{equation}
+F\left( x,y,d \right) =  \frac {1}{2}\frac {\cdot d^2 }{ \left( d^2+\left( x-y \right)^2 \right)^{\frac{3}{2}}} 
+\label{eq:ss}
+\end{equation}
+
+
+
+
+
+\begin{equation}
+\begin{align*}
+I_{ 1 }\left( x \right) &=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F\left( x,y,d \right)\cdot v\left( y \right) { dy }\\I_{ 2 }\left( y \right) &=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F\left( x,y,d \right)\cdot v\left( x \right) { dx }
+\end{align*}
+\label{eq:ss}
+\end{equation}
+
+
 \section*{Question 1}
 
 
 
+Bla bla bla something SVD........
+
+\begin{equation}
+A \cdot x = b
+\label{eq:axb}
+\end{equation}
+
+Equations \ref{eq:A}-\ref{eq:b} illustrate our implementation of \(A\) for \( N = 4 \).
+The C++ implementation of equations \ref{eq:A}-\ref{eq:b} is scaleable (see enclosed main.cpp, line ??-??).
 
 
-\begin{align}
-\beta_1 &= (1-\varepsilon_1) \cdot h \\
-\beta_2 &= (1-\varepsilon_2) \cdot h
-\end{align}
+
+
+
 
 
 \begin{equation}
- \begin{pmatrix}
-'   0  &   1  &  0  &  0  &  0  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_1,y_0, d)  &   - \beta_1 \cdot f(x_1,y_1, d)  &   - \beta_1 \cdot f(x_1,y_2, d)  &   - \beta_1 \cdot f(x_1,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_1,y_4, d)\\
+ A = \begin{bmatrix}
+   0  &   1  &  0  &  0  &  0  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_1,y_0, d)  &   - \beta_1 \cdot f(x_1,y_1, d)  &   - \beta_1 \cdot f(x_1,y_2, d)  &   - \beta_1 \cdot f(x_1,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_1,y_4, d)\\
    0  &   0  &  1  &  0  &  0  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_2,y_0, d)  &   - \beta_1 \cdot f(x_2,y_1, d)  &   - \beta_1 \cdot f(x_2,y_2, d)  &   - \beta_1 \cdot f(x_2,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_2,y_4, d)\\
    0  &   0  &  0  &  1  &  0  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_3,y_0, d)  &   - \beta_1 \cdot f(x_3,y_1, d)  &   - \beta_1 \cdot f(x_3,y_2, d)  &   - \beta_1 \cdot f(x_3,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_3,y_4, d)\\
    0  &   0  &  0  &  0  &  1  & - \frac{1}{2} \cdot \beta_1 \cdot f(x_4,y_0, d)  &   - \beta_1 \cdot f(x_4,y_1, d)  &   - \beta_1 \cdot f(x_4,y_2, d)  &   - \beta_1 \cdot f(x_4,y_3, d)  &   - \frac{1}{2} \cdot \beta_1 \cdot f(x_4,y_4, d)\\
-\end{pmatrix}
-\end{equation}
-
-
-\begin{equation}
-A=\begin{pmatrix}1 & 0 & 0 & 0 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 0 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 0 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 0 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 0 },y_{ N },d) \\ 0 & 1 & 0 & 0 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 1 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 1 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 1 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 1 },y_{ N },d) \\ 0 & 0 & 1 & 0 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 2 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 2 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 2 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 2 },y_{ N },d) \\ 0 & 0 & 0 & 1 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 3 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 3 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 3 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 3 },y_{ N },d) \\ 0 & 0 & 0 & 0 & 1 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 4 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 4 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 4 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 4 },y_{ N },d)\\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y0,d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 0 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 0 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 0 },d) & 1 & 0 & 0 & 0 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y_{ 1 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 1 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 1 },d) & 0 & 1 & 0 & 0 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y_{ 2 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 2 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 2 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 2 },d) & 0 & 0 & 1 & 0 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y_{ 3 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 3 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 3 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 3 },d) & 0 & 0 & 0 & 1 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y0_{ 4 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 4 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 4 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 4 },d) & 0 & 0 & 0 & 0 & 1 \end{pmatrix}
- \end{equation}
-
-
-
-
-
-\begin{equation}
- \begin{pmatrix}
    - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y0, d)      &   - \beta_2 \cdot f(x_1,y_0, d)  &   - \beta_2 \cdot f(x_2,y_0, d)  &   - \beta_2 \cdot f(x_4,y_0, d)  &  - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_0, d) &  1  &   0  &  0  &  0  &  0\\
    - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y_1, d)    &   - \beta_2 \cdot f(x_1,y_1, d)  &   - \beta_2 \cdot f(x_2,y_1, d)  &   - \beta_2 \cdot f(x_4,y_1, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_1, d) &  0  &   1  &  0  &  0  &  0\\
    - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y_2, d)    &   - \beta_2 \cdot f(x_1,y_2, d)  &   - \beta_2 \cdot f(x_2,y_2, d)  &   - \beta_2 \cdot f(x_4,y_2, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_2, d) &  0  &   0  &  1  &  0  &  0\\
    - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y_3, d)    &   - \beta_2 \cdot f(x_1,y_3, d)  &   - \beta_2 \cdot f(x_2,y_3, d)  &   - \beta_2 \cdot f(x_4,y_3, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_3, d) &  0  &   0  &  0  &  1  &  0\\
    - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y0_4, d)  &   - \beta_2 \cdot f(x_1,y_4, d)  &   - \beta_2 \cdot f(x_2,y_4, d)  &   - \beta_2 \cdot f(x_4,y_4, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_4, d) &  0  &   0  &  0  &  0  &  1 \\
-\end{pmatrix}
+\end{bmatrix}
+\label{eq:A}
+\end{equation}
+
+where \( \beta_1 = (1-\varepsilon_1) \cdot h \), \(\beta_2 = (1-\varepsilon_2) \cdot h\) and \( h = \frac { \left( d-d \right)  }{ N } \)
+
+
+
+%
+%\begin{equation}
+%A=\begin{bmatrix}%1 & 0 & 0 & 0 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 0 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 0 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 0 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 0 },y_{ N },d) \\ 0 & 1 & 0 & 0 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 1 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 1 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 1 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 1 },y_{ N },d) \\ 0 & 0 & 1 & 0 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 2 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 2 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 2 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 2 },y_{ N },d) \\ 0 & 0 & 0 & 1 & 0 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 3 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 3 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 3 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 3 },y_{ N },d) \\ 0 & 0 & 0 & 0 & 1 & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 4 },y_{ 0 },d) & -\beta _{ 1 }\cdot f(x_{ 4 },y_{ 1 },d) & \cdots  & -\beta _{ 1 }\cdot f(x_{ 4 },y_{ N-1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 1 }\cdot f(x_{ 4 },y_{ N },d)\\%% -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y0,d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 0 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 0 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 0 },d) & 1 & 0 & 0 & 0 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y_{ 1 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 1 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 1 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 1 },d) & 0 & 1 & 0 & 0 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y_{ 2 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 2 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 2 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 2 },d) & 0 & 0 & 1 & 0 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y_{ 3 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 3 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 3 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 3 },d) & 0 & 0 & 0 & 1 & 0 \\ -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 0 },y0_{ 4 },d) & -\beta _{ 2 }\cdot f(x_{ 1 },y_{ 4 },d) & \cdots  & -\beta _{ 2 }\cdot f(x_{ N-1 },y_{ 4 },d) & -\frac { 1 }{ 2 } \cdot \beta _{ 2 }\cdot f(x_{ 4 },y_{ 4 },d) & 0 & 0 & 0 & 0 & 1 \end{bmatrix}
+% \end{equation}
+%
+
+
+
+
+%\begin{equation}
+% \begin{bmatrix}
+%   - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y0, d)      &   - \beta_2 \cdot f(x_1,y_0, d)  &   - \beta_2 \cdot f(x_2,y_0, d)  &   - \beta_2 \cdot f(x_4,y_0, d)  &  - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_0, d) &  1  &   0  &  0  &  0  &  0\\
+%   - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y_1, d)    &   - \beta_2 \cdot f(x_1,y_1, d)  &   - \beta_2 \cdot f(x_2,y_1, d)  &   - \beta_2 \cdot f(x_4,y_1, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_1, d) &  0  &   1  &  0  &  0  &  0\\
+%   - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y_2, d)    &   - \beta_2 \cdot f(x_1,y_2, d)  &   - \beta_2 \cdot f(x_2,y_2, d)  &   - \beta_2 \cdot f(x_4,y_2, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_2, d) &  0  &   0  &  1  &  0  &  0\\
+%   - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y_3, d)    &   - \beta_2 \cdot f(x_1,y_3, d)  &   - \beta_2 \cdot f(x_2,y_3, d)  &   - \beta_2 \cdot f(x_4,y_3, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_3, d) &  0  &   0  &  0  &  1  &  0\\
+%   - \frac{1}{2} \cdot \beta_2 \cdot f(x_0,y0_4, d)  &   - \beta_2 \cdot f(x_1,y_4, d)  &   - \beta_2 \cdot f(x_2,y_4, d)  &   - \beta_2 \cdot f(x_4,y_4, d)  &   - \frac{1}{2} \cdot \beta_2 \cdot f(x_4,y_4, d) &  0  &   0  &  0  &  0  &  1 \\
+%\end{bmatrix}
+%\end{equation}
+
+\begin{equation}
+ x ={ \begin{bmatrix} u_0 & u_1 & u_2 & u_3 & u_4 & v_0 & v_1 & v_2 & v_3 & v_4  \end{bmatrix} }^{ T } 
+ \label{eq:x}
 \end{equation}
 
 \begin{equation}
- \begin{pmatrix}
- u_0\\
- u_1\\
- u_2\\
- u_3\\
- u_4\\
- v_0\\
- v_1\\
- v_2\\
- v_3\\
- v_4\\
- 
- \end{pmatrix}
-\end{equation}
-
-\begin{equation}
- \begin{pmatrix}
- \varepsilon_1 \sigma T_1^4\\
- \varepsilon_1 \sigma T_1^4\\
- \varepsilon_1 \sigma T_1^4\\
- \varepsilon_1 \sigma T_1^4\\
- \varepsilon_1 \sigma T_1^4\\
- \varepsilon_2 \sigma T_2^4\\
- \varepsilon_2 \sigma T_2^4\\
- \varepsilon_2 \sigma T_2^4\\
- \varepsilon_2 \sigma T_2^4\\
+ b ={ \begin{bmatrix}
+ \varepsilon_1 \sigma T_1^4 &
+ \varepsilon_1 \sigma T_1^4&
+ \varepsilon_1 \sigma T_1^4&
+ \varepsilon_1 \sigma T_1^4&
+ \varepsilon_1 \sigma T_1^4&
+ \varepsilon_2 \sigma T_2^4&
+ \varepsilon_2 \sigma T_2^4&
+ \varepsilon_2 \sigma T_2^4&
+ \varepsilon_2 \sigma T_2^4&
  \varepsilon_2 \sigma T_2^4
- \end{pmatrix}
+ \end{bmatrix} }^{ T } 
+ \label{eq:b}
+\end{equation}
+
+
+\newpage
+\section*{Question 2}
+
+
+
+
+\begin{equation}
+\begin{align*}
+Q_{ 1 }&=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } \left( { u }\left( x \right) -I\left( x \right)  \right) { dx }\\ 
+u\left( x \right) &={ c }_{ 11 }+{ c }_{ 12 }\cdot I_{ 1 }\\ 
+{ I }_{ 1 }&=\frac { u\left( x \right) -{ c }_{ 11 } }{ { c }_{ 12 } } \\ 
+Q_{ 1 }&=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } \left( { u }\left( x \right) -\frac { u\left( x \right) -{ c }_{ 11 } }{ { c }_{ 12 } }  \right) { dx }
+\end{align*}
+\label{eq:ss}
+\end{equation}
+
+
+\begin{equation}
+\begin{align*}
+{ c }_{ 11 }&={ \varepsilon  }_{ 1 }\cdot \sigma \cdot { T }_{ 1 }^{ 4 }\\ 
+{ c }_{ 12 }&=\left( 1-{ \varepsilon  }_{ 1 } \right) \\ 
+{ c }_{ 21 }&={ \varepsilon  }_{ 2 }\cdot \sigma \cdot { T }_{ 2 }^{ 4 }\\ 
+{ c }_{ 22 }&=\left( 1-{ \varepsilon  }_{ 2 } \right) 
+\end{align*}
+\label{eq:ad}
 \end{equation}
 
 
 
-\section*{Question 2}
+\begin{equation}
+\begin{align*}
+{ Q }_{ 1 }&=\frac { 1 }{ 2 } \cdot h\cdot \left( u\left( { x }_{ 0 } \right) -\left( \frac { u\left( { x }_{ 0 } \right) -{ c }_{ 11 } }{ { c }_{ 12 } }  \right) +u\left( { x }_{ N } \right) -\left( \frac { u\left( { x }_{ N } \right) -{ c }_{ 11 } }{ { c }_{ 12 } }  \right)  \right) +h\sum _{ i=1 }^{ N-1 }{ u\left( { x }_{ i } \right) - } \left( \frac { u\left( { x }_{ i } \right) -{ c }_{ 11 } }{ { c }_{ 12 } }  \right) \\
+{ Q }_{ 2 }&=\frac { 1 }{ 2 } \cdot h\cdot \left( v\left( { y }_{ 0 } \right) -\left( \frac { v\left( { y }_{ 0 } \right) -{ c }_{ 21 } }{ { c }_{ 22 } }  \right) +v\left( { y }_{ N } \right) -\left( \frac { v\left( { y }_{ N } \right) -{ c }_{ 21 } }{ { c }_{ 22 } }  \right)  \right) +h\sum _{ i=1 }^{ N-1 }{ v\left( { y }_{ i } \right) - } \left( \frac { v\left( { y }_{ i } \right) -{ c }_{ 21 } }{ { c }_{ 22 } }  \right)  
+\end{align*}
+\label{eq:Q12}
+\end{equation}
+
+
+\begin{table}[th!]
+\centering
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
+ N &  \( u(-0.50) \) & \( u(-0.25) \) & \( u(0.0) \) & \( u(0.25) \) & \( u(0.50) \) & \( v(-0.50) \) & \( v(-0.25) \) & \( v(0.0) \) & \( v(0.25) \) & \( v(0.50) \)  \\\hline
+4&  &  &  &  &  &  &  &  &  & \\
+16&  &  &  &  &  &  &  &    & \\
+32&  &  &  &  &  &  &    &  & \\
+64&  &  &  &  &  &   &  &  & \\
+128&  &  &  &  &   &  &  &  & \\ 
+256&  &  &  &   &  &  &  &  & \\
+512&  &  &  &  &  &  &  &  & \\
+1024&  &   &  &  &  &  &  &  & \\
+\end{tabular}
+\caption[tekst i indholdsfortegnelsen]{tabeltekst}
+\label{tb:resultater}
+\end{table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
 \section*{Question 3}
+
+
+
+\begin{equation}
+\begin{align*}
+EE&=\frac { S\left( h_{ 2 } \right) -S\left( h_{ 1 } \right)  }{ \alpha ^{ k }-1 } \\ 
+\alpha ^{ k }&=\frac { S\left( h_{ 1 } \right) -S\left( h_{ 2 } \right)  }{ S\left( h_{ 2 } \right) -S\left( h_{ 3 } \right)  } 
+\end{align*}
+\label{eq:Q12}
+\end{equation}
+
+
+
+\begin{table}[th!]
+\centering
+\begin{tabular}{c|c|c|c|c|c|c}
+ N &  \( Q_1 \) & \( { \alpha }_{  1}^{ k } \) & \(  EE_1 \) & \( Q_2 \) & \(  { \alpha }_{  2}^{ k } \) & \( EE_2 \)  \\\hline
+4&  &  &  &  & &  \\
+16&  &  &  &  & &  \\
+32&  &  &  &  &  & \\
+64&  &  &  &  & &  \\
+128&  &  &  &  & &  \\
+256&  &  &  &  &  & \\
+512&  &  &  &  &  & \\
+1024&  &  &  &  &  & \\
+\end{tabular}
+\caption[tekst i indholdsfortegnelsen]{tabeltekst}
+\label{tb:resultater}
+\end{table}
 
