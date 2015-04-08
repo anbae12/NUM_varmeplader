@@ -131,9 +131,7 @@ MatDoub make_A(int x, Doub XXX, Doub YYY, Doub h){
     
     return A;
 }
-<<<<<<< HEAD
 
-=======
 // MIKKEL Trapetz
 template<class T>
 
