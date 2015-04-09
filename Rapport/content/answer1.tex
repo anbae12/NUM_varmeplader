@@ -10,8 +10,10 @@ v\left( y \right) &=\varepsilon _{ 2 }\sigma { T }_{ 2 }^{ 4 }+\left( 1-\varepsi
 \end{align*}
 \label{eq:1}
 \end{equation}
+
+
 \begin{equation}
-F\left( x,y,d \right) =  \frac {1}{2}\frac {\cdot d^2 }{ \left( d^2+\left( x-y \right)^2 \right)^{\frac{3}{2}}} 
+F\left( x,y,d \right) =  \frac {1}{2}\frac { d^2 }{ \left( d^2+\left( x-y \right)^2 \right)^{\frac{3}{2}}} 
 \label{eq:2}
 \end{equation}
 \begin{equation}
@@ -23,16 +25,30 @@ I_{ 1 }\left( x \right) &=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F
 \textbf{DATA:} \( T_1 = 1000\), \(  T_2=500 \), \(  \varepsilon_1 = 0.80 \), \(  \varepsilon_2 = 0.60 \), \(  \sigma = 1.7212\cdot 10^{-9} \), \( d=1.0  \), \(  w=1.0 \)
 \section*{Question 1}
 
-SVD is used to create a system of linear equations (SLE) (equation \ref{eq:A}) based on equations \ref{eq:1}-\ref{eq:3}. \\
-Equations \ref{eq:A}-\ref{eq:b} illustrate our SLE for \( N = 4 \).
-The C++ implementation of equation \ref{eq:A} and equation \ref{eq:b} is scaleable (see enclosed main.cpp, line 39-84, line 93-104). \\
-Equation \ref{eq:x} display the returned \texttt{VecDoub} by SVD solve function. 
+Equation \ref{eq:1} is rearranged to give equation \ref{eq:4}.
 
 \begin{equation}
-A \cdot z = b
-\label{eq:axb}
+\begin{align*}
+u\left( x \right)- \left( 1-\varepsilon _{ 1 } \right) \int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F\left( x,y,d \right) \cdot v\left( y \right) { dy } &=\varepsilon _{ 1 }\sigma { T }_{ 1 }^{ 4 }\\ 
+v\left( y \right) -\left( 1-\varepsilon _{ 2 } \right) \int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F\left( x,y,d \right) \cdot u\left( x \right) { dx } &=\varepsilon _{ 2 }\sigma { T }_{ 2 }^{ 4 }
+\end{align*}
+\label{eq:4}
 \end{equation}
 
+The integral needs to be discretized in order to make it into a system of linear equations (SLE). The trapez-method is used to obtain equation \ref{eq:5}.
+
+\begin{equation}
+\begin{align*}
+u\left( x \right)- \left( 1-\varepsilon _{ 1 } \right) + h \cdot ( \frac{1}{2} \cdot F(x,y_0,d) \cdot v(y_0) + \frac{1}{2} \cdot F(x,y_N,d) \cdot v(y_N) +  \sum\limits_{i=1}^{N-1} F(x,y_i,d) \cdot v(y_i) ) &=\varepsilon _{ 1 }\sigma { T }_{ 1 }^{ 4 }\\ 
+v\left( x \right)- \left( 1-\varepsilon _{ 2 } \right) + h \cdot ( \frac{1}{2} \cdot F(x_0,y,d) \cdot u(x_0) + \frac{1}{2} \cdot F(x_N,y,d) \cdot u(x_N) +  \sum\limits_{i=1}^{N-1} F(x_i,y,d) \cdot u(x_i) ) &=\varepsilon _{ 2 }\sigma { T }_{ 2 }^{ 4 }
+\end{align*}
+\label{eq:5}
+\end{equation}
+
+From equation \ref{eq:5} a SLE in the form $A \cdot z = b$ can be made.
+\\Equations \ref{eq:A}-\ref{eq:b} illustrates a SLE for \( N = 4 \).
+The C++ implementation of equation \ref{eq:A} and equation \ref{eq:b} is scaleable (see enclosed main.cpp, line 39-84, line 93-104). \\
+Equation \ref{eq:x} display the returned \texttt{VecDoub} by SVD solve function. 
 
 \begin{equation}
  A = \begin{bmatrix}
@@ -49,7 +65,7 @@ A \cdot z = b
 \label{eq:A}
 \end{equation}
 
-\textbf{where:} \( \beta_1 = (1-\varepsilon_1) \cdot h \), \(\beta_2 = (1-\varepsilon_2) \cdot h\) and \( h = \frac { \left( d-d \right)  }{ N } \)
+\textbf{where:} \( \beta_1 = (1-\varepsilon_1) \cdot h \),   \(\beta_2 = (1-\varepsilon_2) \cdot h\) and   \( h = \frac { \left( \frac{1}{2} w - -\frac{1}{￼2} w\right) }{ N } \)
 
 
 
@@ -96,9 +112,10 @@ A \cdot z = b
 
 \newpage
 \section*{Question 2}
+SVD is used to solve the SLE from question 1. Results are shown in table \ref{tb:resultater}.
+$Q_1$ and $Q_2$ needs to be calculated. A rearrangement of the equation for $Q_1$ is made in equation \ref{eq:ss}.	A similar rearrangement is made for the equation for $Q_2$.
 
-Equation \ref{eq:ss} demo the calculation of \( Q_1 \). The same principle is used to calculate \( Q_2 \). 
-The constants \( c_{11} \) and \( c_{12} \) belongs \( Q_1 \) and \( c_{21} \) and \( c_{22} \) belongs \( Q_2 \) which is used in equation \ref{eq:Q12}.\\
+The constants \( c_{11} \) and \( c_{12} \) belongs to the equation for \( Q_1 \) and \( c_{21} \) and \( c_{22} \) belongs to the equation for \( Q_2 \).
 
 \begin{equation}
 \begin{align*}
@@ -109,6 +126,7 @@ Q_{ 1 }&=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } \left( { u }\left(
 \end{align*}
 \label{eq:ss}
 \end{equation}
+
 \begin{equation}
 \begin{align*}
 { c }_{ 11 }&={ \varepsilon  }_{ 1 }\cdot \sigma \cdot { T }_{ 1 }^{ 4 }\\ 
@@ -119,7 +137,7 @@ Q_{ 1 }&=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } \left( { u }\left(
 \label{eq:ad}
 \end{equation}
 
-Equation \ref{eq:Q12} use the result from SVD to calculate the discrete values for \( Q_1 \) and \( Q_2 \) for a given \( N \).
+The integrals in equation \ref{eq:ad} need to be discretized. This is done with the trapez-method and the resulting equations can be seen in equation \ref{eq:Q12}. The results for $Q_1$ and $Q_2$ can be seen in table \ref{tb:resultater1}.
 
 \begin{equation}
 \begin{align*}
@@ -153,20 +171,17 @@ The values for \( u\left( x \right)  \) and  \( v\left( y \right)  \), \( x=y= \
 
 \newpage
 \section*{Question 3}
-
-The equation \ref{eq:Q12} use the results from table \ref{tb:resultater} to determine  \( Q_1  \) and \( Q_2  \)  for a given \( N \).\\
-Equation \ref{eq:EE} is used to determine the estimated error (\( EE \)) and estimated order (\( \alpha^k \)). 
-
-\( Q_1  \), \( Q_2  \), \( EE \) and \( \alpha^k \) is calculated for a given \( N \), showed in table \ref{tb:resultater1}. The implementation\footnote{The complete code implementation can by found inside the zipped file.} for this determination is demoed in code snippet \ref{code:UNOtimerTestpy}.
+The Richardson $\alpha^k$ estimate and Richardson error estimate is shown in \ref{eq:EE}. The $\alpha^k$ estimate is seen in  table \ref{tb:resultater1} to converge to 4. Thus $\alpha^k = 4$ is used in the Richarson error estimate.
 
 \begin{equation}
 \begin{align*}
-EE&=\frac { S\left( h_{ 2 } \right) -S\left( h_{ 1 } \right)  }{ \alpha ^{ k }-1 } \\ 
-\alpha ^{ k }&=\frac { S\left( h_{ 1 } \right) -S\left( h_{ 2 } \right)  }{ S\left( h_{ 2 } \right) -S\left( h_{ 3 } \right)  } 
+\alpha ^{ k }&=\frac { S\left( h_{ 1 } \right) -S\left( h_{ 2 } \right)  }{ S\left( h_{ 2 } \right) -S\left( h_{ 3 } \right)  } \\
+EE&=\frac { S\left( h_{ 2 } \right) -S\left( h_{ 1 } \right)  }{ \alpha ^{ k }-1 } 
 \end{align*}
 \label{eq:EE}
 \end{equation}
 
+\( Q_1  \), \( Q_2  \), \( EE \) and \( \alpha^k \) is calculated for a given \( N \), and the results can be seen in table \ref{tb:resultater1}. It is clearly seen that the estimated error decreases when $N$ is increased.
 
 
 \begin{table}[th!]
@@ -187,10 +202,7 @@ EE&=\frac { S\left( h_{ 2 } \right) -S\left( h_{ 1 } \right)  }{ \alpha ^{ k }-1
 \label{tb:resultater1}
 \end{table}
 
-
-
-
-\todo[inline]{Hvad kan vi sige om resultatet?.. skulle vi R på R på R på R.......}
+ The code\footnote{The complete code implementation can by found inside the zipped file.} for solving the SLE, calculating $Q_1$ and $Q_2$ and calculating the Richardson $\alpha^k$ and error estimate is shown in code snippet \ref{code:UNOtimerTestpy}.
 
 \newpage
 %%%% USE THIS FOR INSERT CODE!!
