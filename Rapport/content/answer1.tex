@@ -1,54 +1,37 @@
-\section*{Radiation Balance between parallel plates}
+\section*{Radiation Balance Between Parallel Plates}
 Assignment is completed by Mikkel Jaedicke (mijae12) \& Anders Bæk (anbae12)
 
-
+The radiation balance is covered by equations \ref{eq:1}-\ref{eq:3}. 
 
 \begin{equation}
 \begin{align*}
 u\left( x \right) &=\varepsilon _{ 1 }\sigma { T }_{ 1 }^{ 4 }+\left( 1-\varepsilon _{ 1 } \right) \int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F\left( x,y,d \right) \cdot v\left( y \right) { dy }\\ 
 v\left( y \right) &=\varepsilon _{ 2 }\sigma { T }_{ 2 }^{ 4 }+\left( 1-\varepsilon _{ 2 } \right) \int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F\left( x,y,d \right) \cdot u\left( x \right) { dx }
 \end{align*}
-\label{eq:ss}
+\label{eq:1}
 \end{equation}
-
-
-
-
 \begin{equation}
 F\left( x,y,d \right) =  \frac {1}{2}\frac {\cdot d^2 }{ \left( d^2+\left( x-y \right)^2 \right)^{\frac{3}{2}}} 
-\label{eq:ss}
+\label{eq:2}
 \end{equation}
-
-
-
-
-
 \begin{equation}
 \begin{align*}
 I_{ 1 }\left( x \right) &=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F\left( x,y,d \right)\cdot v\left( y \right) { dy }\\I_{ 2 }\left( y \right) &=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } F\left( x,y,d \right)\cdot v\left( x \right) { dx }
 \end{align*}
-\label{eq:ss}
+\label{eq:3}
 \end{equation}
-
-
+\textbf{DATA:} \( T_1 = 1000\), \(  T_2=500 \), \(  \varepsilon_1 = 0.80 \), \(  \varepsilon_2 = 0.60 \), \(  \sigma = 1.7212\cdot 10^{-9} \), \( d=1.0  \), \(  w=1.0 \)
 \section*{Question 1}
 
-
-
-Bla bla bla something SVD........
+SVD is used to create a system of linear equations (SLE) (equation \ref{eq:A}) based on equations \ref{eq:1}-\ref{eq:3}. \\
+Equations \ref{eq:A}-\ref{eq:b} illustrate our SLE for \( N = 4 \).
+The C++ implementation of equation \ref{eq:A} and equation \ref{eq:b} is scaleable (see enclosed main.cpp, line 39-84, line 93-104). \\
+Equation \ref{eq:x} display the returned \texttt{VecDoub} by SVD solve function. 
 
 \begin{equation}
-A \cdot x = b
+A \cdot z = b
 \label{eq:axb}
 \end{equation}
-
-Equations \ref{eq:A}-\ref{eq:b} illustrate our implementation of \(A\) for \( N = 4 \).
-The C++ implementation of equations \ref{eq:A}-\ref{eq:b} is scaleable (see enclosed main.cpp, line ??-??).
-
-
-
-
-
 
 
 \begin{equation}
@@ -66,7 +49,7 @@ The C++ implementation of equations \ref{eq:A}-\ref{eq:b} is scaleable (see encl
 \label{eq:A}
 \end{equation}
 
-where \( \beta_1 = (1-\varepsilon_1) \cdot h \), \(\beta_2 = (1-\varepsilon_2) \cdot h\) and \( h = \frac { \left( d-d \right)  }{ N } \)
+\textbf{where:} \( \beta_1 = (1-\varepsilon_1) \cdot h \), \(\beta_2 = (1-\varepsilon_2) \cdot h\) and \( h = \frac { \left( d-d \right)  }{ N } \)
 
 
 
@@ -90,7 +73,7 @@ where \( \beta_1 = (1-\varepsilon_1) \cdot h \), \(\beta_2 = (1-\varepsilon_2) \
 %\end{equation}
 
 \begin{equation}
- x ={ \begin{bmatrix} u_0 & u_1 & u_2 & u_3 & u_4 & v_0 & v_1 & v_2 & v_3 & v_4  \end{bmatrix} }^{ T } 
+ z ={ \begin{bmatrix} u_0 & u_1 & u_2 & u_3 & u_4 & v_0 & v_1 & v_2 & v_3 & v_4  \end{bmatrix} }^{ T } 
  \label{eq:x}
 \end{equation}
 
@@ -114,8 +97,8 @@ where \( \beta_1 = (1-\varepsilon_1) \cdot h \), \(\beta_2 = (1-\varepsilon_2) \
 \newpage
 \section*{Question 2}
 
-
-
+Equation \ref{eq:ss} demo the calculation of \( Q_1 \). The same principle is used to calculate \( Q_2 \). 
+The constants \( c_{11} \) and \( c_{12} \) belongs \( Q_1 \) and \( c_{21} \) and \( c_{22} \) belongs \( Q_2 \) which is used in equation \ref{eq:Q12}.\\
 
 \begin{equation}
 \begin{align*}
@@ -126,8 +109,6 @@ Q_{ 1 }&=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } \left( { u }\left(
 \end{align*}
 \label{eq:ss}
 \end{equation}
-
-
 \begin{equation}
 \begin{align*}
 { c }_{ 11 }&={ \varepsilon  }_{ 1 }\cdot \sigma \cdot { T }_{ 1 }^{ 4 }\\ 
@@ -138,7 +119,7 @@ Q_{ 1 }&=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } \left( { u }\left(
 \label{eq:ad}
 \end{equation}
 
-
+Equation \ref{eq:Q12} use the result from SVD to calculate the discrete values for \( Q_1 \) and \( Q_2 \) for a given \( N \).
 
 \begin{equation}
 \begin{align*}
@@ -148,12 +129,7 @@ Q_{ 1 }&=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } \left( { u }\left(
 \label{eq:Q12}
 \end{equation}
 
-
-%%% USE THIS FOR INSERT CODE!!
-\lstinputlisting[firstline=1,firstnumber=1,lastline=47
-,caption={MISSING.},label=code:UNOtimerTestpy]
-{../../mijae12_anbae12/Varmeplader/Varmeplader/main.cpp}
-
+The values for \( u\left( x \right)  \) and  \( v\left( y \right)  \), \( x=y= \pm0.5  \), \( x=y= \pm0.25  \) and \( x=y= 0  \)  for a given \( N \) is showed in table \ref{tb:resultater}.
 
 \begin{table}[th!]
 \centering
@@ -171,21 +147,24 @@ Q_{ 1 }&=\int _{ -\frac { 1 }{ 2 } w }^{ \frac { 1 }{ 2 } w } \left( { u }\left(
 512&1.39049081e+03&1.39614393e+03&1.39456943e+03&1.39456943e+03&1.39049081e+03&2.61365585e+02&2.61717471e+02&3.13622615e+02&3.13621701e+02&2.61365585e+02 \\
 1024&1.39049083e+03&1.39614403e+03&1.39456945e+03&1.39456945e+03&1.39049083e+03&2.61365624e+02&2.61541638e+02&3.13622734e+02&3.13622505e+02&2.61365624e+02 \\
 \end{tabular}
-\caption[tekst i indholdsfortegnelsen]{tabeltekst}
+\caption[tekst i indholdsfortegnelsen]{Values for \( u\left( x \right)  \) and  \( v\left( y \right)  \), \( x=y= \pm0.5  \), \( x=y= \pm0.25  \) and \( x=y= 0  \)  for a given \( N \).}
 \label{tb:resultater}
 \end{table}
 
-
-
 \newpage
 \section*{Question 3}
+
+The equation \ref{eq:Q12} use the results from table \ref{tb:resultater} to determine  \( Q_1  \) and \( Q_2  \)  for a given \( N \).\\
+Equation \ref{eq:EE} is used to determine the estimated error (\( EE \)) and estimated order (\( \alpha^k \)). 
+
+\( Q_1  \), \( Q_2  \), \( EE \) and \( \alpha^k \) is calculated for a given \( N \), showed in table \ref{tb:resultater1}. The implementation\footnote{The complete code implementation can by found inside the zipped file.} for this determination is demoed in code snippet \ref{code:UNOtimerTestpy}.
 
 \begin{equation}
 \begin{align*}
 EE&=\frac { S\left( h_{ 2 } \right) -S\left( h_{ 1 } \right)  }{ \alpha ^{ k }-1 } \\ 
 \alpha ^{ k }&=\frac { S\left( h_{ 1 } \right) -S\left( h_{ 2 } \right)  }{ S\left( h_{ 2 } \right) -S\left( h_{ 3 } \right)  } 
 \end{align*}
-\label{eq:Q12}
+\label{eq:EE}
 \end{equation}
 
 
@@ -204,7 +183,19 @@ EE&=\frac { S\left( h_{ 2 } \right) -S\left( h_{ 1 } \right)  }{ \alpha ^{ k }-1
 512&1.27141405e+03&3.99996020e+00&-1.65467803e-04&-2.82313711e+02&3.99996540e+00&-3.53303919e-04 \\
 1024&1.27141392e+03&3.99999013e+00&-4.13670527e-05&-2.82313976e+02&3.99999125e+00&-8.83261731e-05 \\
 \end{tabular}
-\caption[tekst i indholdsfortegnelsen]{tabeltekst}
-\label{tb:resultater}
+\caption[tekst i indholdsfortegnelsen]{\( Q_1  \), \( Q_2  \), \( EE \) and \( \alpha^k \) is calculated for a given \( N \).}
+\label{tb:resultater1}
 \end{table}
+
+
+
+
+\todo[inline]{Hvad kan vi sige om resultatet?.. skulle vi R på R på R på R.......}
+
+\newpage
+%%%% USE THIS FOR INSERT CODE!!
+\lstinputlisting[firstline=139,firstnumber=139,lastline=173
+,caption={Code snippet of main.cpp, line 139-173.},label=code:UNOtimerTestpy]
+{../../mijae12_anbae12/Varmeplader/Varmeplader/main.cpp}
+
 
