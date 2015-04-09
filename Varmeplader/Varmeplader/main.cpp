@@ -9,7 +9,6 @@
 #include <iostream>
 #include <iomanip>      // std::setw
 #include "nr3.h"
-#include "quadrature.h"
 #include "svd.h"
 
 // DATA
